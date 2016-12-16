@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class SearchBar extends Component{
 	constructor(props){
 		super(props);
-		this.state={term:'Modi'};
+		this.state={term:this.props.defTerm};
 	}
 	render(){
 		return(
