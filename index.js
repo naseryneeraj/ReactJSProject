@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
+import VideoDesc from './components/video_description';
 import YTSearch from 'youtube-api-search';
 
 const API_KEY='AIzaSyCbNuTFSQcdedZz6h4wfVS-l-hY6S1yrfE';
@@ -14,7 +15,7 @@ class App extends Component{
 			videos:[],
 			selectedVideo:null
 		};
-		this.videoSearch('Modi');
+		this.videoSearch('Harry Potter');
 	}
 	videoSearch(term){
         YTSearch({key:API_KEY,term:term},videos=>{
@@ -25,8 +26,9 @@ class App extends Component{
 	render(){
 		return(
 		 <div>
-			<SearchBar onSearchTermChange={term=>this.videoSearch(term)}/>
-			<VideoList videos={this.state.videos}/>
+			<SearchBar defTerm="Harry Potter" onSearchTermChange={term=>this.videoSearch(term)}/>
+			 <VideoList videos={this.state.videos} onVideoSelect={selectedVideo => {this.setState({selectedVideo});}}/>
+             <VideoDesc video={this.state.selectedVideo}/>
 		 </div>
 		);
 	 }
